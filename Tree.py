@@ -25,6 +25,12 @@ def rand_tree(depth = 0):
         rand_tree(depth + 1)
     )
 
+def generate_trees(num):
+    trees = []
+    for i in range(num):
+        trees.append(rand_tree())
+    return trees
+
 def mutate(node):
     if random.randint(-1, 1) == -1:
         node.left = rand_tree()
