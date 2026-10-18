@@ -1,4 +1,5 @@
 import random
+from collections import deque
 
 OPERATORS = ['+','-','/','*']
 MAX_DEPTH = 3
@@ -42,25 +43,34 @@ def mutate(node):
     else:
         node.right = rand_leaf()
 
-# takes two parent nodes of two trees of the randomly selected nodes and which side it is
-# on to perform crossover
-def crossover(node_a, side_a, node_b, side_b):
-    if side_a == 0:
-        a = node_a.left
-    else:
-        a = node_a.right
+# Takes in two tree root nodes to crossover and swaps a subtree of each tree at random nodes in the trees
+def crossover(tree_a, tree_b):
+    node_a, side_a = get_node(tree_a, random.randint(1, count_nodes(tree_a)))
+    node_b, side_b = get_node(tree_b, random.randint(1, count_nodes(tree_b)))
 
-    if side_b == 0:
-        b = node_b.left
-    else:
-        b = node_b.right
+    a = getattr(node_a, side_a)
+    b = getattr(node_b, side_b)
 
-    if side_a == 0:
-        node_a.left = b
-    else:
-        node_a.right = b
+    setattr(node_a, side_a, b)
+    setattr(node_b, side_b, a)
 
-    if side_b == 0:
-        node_b.left = a
-    else:
-        node_b.right = a
+
+def count_nodes(node):
+    if node is None:
+        return 0
+    return 1 + count_nodes(node.right) + count_nodes(node.left)
+
+def get_node(root, node_num):
+    node = parent = None
+    queue = deque()
+    queue.append((root, None))
+
+    for _ in range(node_num):
+        node, parent = queue.popleft()
+        if node.left is not None:
+            queue.append((node.left, node))
+        if node.right is not None:
+            queue.append((node.right, node))
+    side = 'left' if node_num % 2 == 0 else 'right'
+    return parent, side
+
