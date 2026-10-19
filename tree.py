@@ -1,5 +1,7 @@
 import random
 
+import numpy as np
+
 OPERATORS = ['+','-','/','*']
 MAX_DEPTH = 3
 
@@ -80,3 +82,17 @@ def replace_subtree(node, node_num, subtree):
         node.left,
         replace_subtree(node.right, node_num - 1 - left_size, subtree)
     )
+
+def evaluate(node, val):
+    if node.left is None and node.right is None:
+        return val if node.data == 'x' else node.data
+    if node.data == '+':
+        return evaluate(node.left, val) + evaluate(node.right, val)
+    if node.data == '-':
+        return evaluate(node.left, val) - evaluate(node.right, val)
+    if node.data == '*':
+        return evaluate(node.left, val) * evaluate(node.right, val)
+    if node.data == '/':
+        right = evaluate(node.right, val)
+        left = evaluate(node.left, val)
+        return np.where(right == 0, 1, left / right)
