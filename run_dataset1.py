@@ -14,3 +14,4 @@ result = fit((x_train, y_train))
 
 print(f"Train mse: {get_fitness(result, (x_train, y_train))}")
 print(f"Test mse: {get_fitness(result, (x_test, y_test))}")
+print(to_string(result))
