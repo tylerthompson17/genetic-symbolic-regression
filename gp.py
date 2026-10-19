@@ -1,6 +1,6 @@
 import random
 
-from Tree import *
+from tree import *
 
 NUM_TREES = 100 # initial number of random trees
 NUM_GEN = 10_000 # total recurrences
@@ -8,7 +8,7 @@ SELECTION_P = .1 # probability of individual to be reproduced
 CROSSOVER_P = .88 # probability of individual to take part of crossovers
 MUTATION_P = .02 # probability of individual to be mutated
 
-def fit():
+def fit(data):
     trees = generate_trees(NUM_TREES)
     best_fitness = [] # each value at index n is the best fitness of generation n
 
