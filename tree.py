@@ -3,7 +3,8 @@ import random
 import numpy as np
 
 OPERATORS = ['+','-','/','*']
-MAX_DEPTH = 3
+MAX_INITIAL_DEPTH = 3
+MAX_DEPTH = 8
 
 class Node:
     def __init__(self, data, left=None, right=None):
@@ -19,7 +20,7 @@ def rand_leaf():
 
 def rand_tree(depth = 0):
     rand = random.randint(-1, 1)
-    if depth >= MAX_DEPTH or (depth > 0 and rand >= 0):
+    if depth >= MAX_INITIAL_DEPTH or (depth > 0 and rand >= 0):
         return rand_leaf()
     return Node(
         random.choice(OPERATORS),
@@ -36,9 +37,12 @@ def generate_trees(num):
 def mutate(tree):
     idx = random.randint(1, count_nodes(tree))
     if random.randint(-1, 1) == -1:
-        return replace_subtree(tree, idx, rand_tree())
+        mutated = replace_subtree(tree, idx, rand_tree())
     else:
-        return replace_subtree(tree, idx, rand_leaf())
+        mutated = replace_subtree(tree, idx, rand_leaf())
+    if get_depth(mutated) > MAX_DEPTH:
+        return tree
+    return mutated
 
 # Takes in two tree root nodes to crossover and swaps a subtree of each tree at random nodes in the trees
 def crossover(tree_a, tree_b):
@@ -49,6 +53,17 @@ def crossover(tree_a, tree_b):
 
     crossover_a = replace_subtree(tree_a, idx_a, subtree_b)
     crossover_b = replace_subtree(tree_b, idx_b, subtree_a)
+
+    a_depth = get_depth(crossover_a)
+    b_depth = get_depth(crossover_b)
+
+    if a_depth > MAX_DEPTH > b_depth:
+        return tree_a, crossover_b
+    elif b_depth > MAX_DEPTH > a_depth:
+        return crossover_a, tree_b
+    elif b_depth > MAX_DEPTH and a_depth > MAX_DEPTH:
+        return tree_a, tree_b
+
     return crossover_a, crossover_b
 
 
@@ -56,6 +71,11 @@ def count_nodes(node):
     if node is None:
         return 0
     return 1 + count_nodes(node.right) + count_nodes(node.left)
+
+def get_depth(node):
+    if node is None:
+        return 0
+    return 1 + max(get_depth(node.right), get_depth(node.left))
 
 def get_subtree(node, node_num):
     if node_num == 1:
@@ -94,5 +114,6 @@ def evaluate(node, val):
         return evaluate(node.left, val) * evaluate(node.right, val)
     if node.data == '/':
         right = evaluate(node.right, val)
+        right = np.where(np.abs(right) < .000000001, 1, right) # protects against division by 0 and too small denoms
         left = evaluate(node.left, val)
-        return np.where(right == 0, 1, left / right)
+        return left / right
