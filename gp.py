@@ -10,7 +10,8 @@ SELECTION_P = .1 # probability of individual to be reproduced
 CROSSOVER_P = .88 # probability of individual to take part of crossovers
 MUTATION_P = .02 # probability of individual to be mutated
 TOURN_SIZE = 5 # tournament size
-THRESHOLD = .00000001
+THRESHOLD = .00001
+SIZE_PENALTY = .0005
 
 def fit(data):
     trees = generate_trees(NUM_TREES)
@@ -50,5 +51,5 @@ def get_fitness(tree, data):
 
 def get_individual(trees, fitn):
     selected = random.sample(range(len(trees)), TOURN_SIZE)
-    best = min(selected, key=lambda i: fitn[i])
+    best = min(selected, key=lambda i: fitn[i] + SIZE_PENALTY * count_nodes(trees[i]))
     return trees[best]

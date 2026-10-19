@@ -1,6 +1,6 @@
 import pandas as pd
 
-from gp import fit
+from gp import *
 
 df = pd.read_csv("dataset1.csv")
 
@@ -10,7 +10,7 @@ train_df = df.drop(test_df.index)
 x_train, y_train = train_df["x"].to_numpy(), train_df["f(x)"].to_numpy()
 x_test,  y_test  = test_df["x"].to_numpy(),  test_df["f(x)"].to_numpy()
 
-train_pairs = list(zip(x_train, y_train))
-test_pairs  = list(zip(x_test, y_test))
+result = fit((x_train, y_train))
 
-print(fit((x_train, y_train)))
+print(f"Train mse: {get_fitness(result, (x_train, y_train))}")
+print(f"Test mse: {get_fitness(result, (x_test, y_test))}")
