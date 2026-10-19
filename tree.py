@@ -117,3 +117,8 @@ def evaluate(node, val):
         right = np.where(np.abs(right) < .000000001, 1, right) # protects against division by 0 and too small denoms
         left = evaluate(node.left, val)
         return left / right
+
+def to_string(node):
+    if node.left is None and node.right is None:
+        return str(node.data)
+    return "(" + to_string(node.left) + str(node.data) + to_string(node.right) + ")"
