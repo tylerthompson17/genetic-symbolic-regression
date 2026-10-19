@@ -11,11 +11,14 @@ CROSSOVER_P = .88 # probability of individual to take part of crossovers
 MUTATION_P = .02 # probability of individual to be mutated
 TOURN_SIZE = 5 # tournament size
 THRESHOLD = .00001
-SIZE_PENALTY = .0005
+SIZE_PENALTY = .00001
+STAG_KILL = 50
 
 def fit(data):
     trees = generate_trees(NUM_TREES)
     best_fitness = [] # each value at index n is the best fitness of generation n
+    stagnant = 0
+    best_seen = get_fitness(trees[0], data)
 
     for i in range(NUM_GEN):
         next_gen = []
@@ -27,6 +30,14 @@ def fit(data):
         best = fitn.index(min(fitn))
         best_fitness.append(fitn[best])
         next_gen.append(trees[best]) # force best individual thru
+
+        if fitn[best] > best_seen * .999:
+            stagnant+=1
+            if stagnant > STAG_KILL:
+                return trees[best]
+        else:
+            best_seen = fitn[best]
+            stagnant = 0
 
         if best_fitness[-1] < THRESHOLD:
             return trees[best]
