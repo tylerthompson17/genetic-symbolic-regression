@@ -64,3 +64,6 @@ def get_individual(trees, fitn):
     selected = random.sample(range(len(trees)), TOURN_SIZE)
     best = min(selected, key=lambda i: fitn[i] + SIZE_PENALTY * count_nodes(trees[i]))
     return trees[best]
+
+
+

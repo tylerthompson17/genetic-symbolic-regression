@@ -22,3 +22,24 @@ def relative_error(formula, data):
     y_hat = evaluate(formula, x_points)
     return np.mean(np.abs(y_points - y_hat) / (y_points + 1))
 
+tree.VARIABLES = ["x1", "x2", "x3"]
+tree.REAL_CONSTANTS = True
+gp.CROSSOVER_P = 0.7
+gp.SELECTION_P = 0.1
+gp.MUTATION_P = 0.2
+
+gp.get_fitness = relative_error
+
+best_formula = None
+best_error = float("inf")
+
+for run in range(10):
+    formula = gp.fit((x_train, y_train))
+    error = relative_error(formula, (x_test, y_test))
+    print(run, error, tree.to_string(formula))
+    if error < best_error:
+        best_formula = formula
+        best_error = error
+
+print("best formula:", tree.to_string(best_formula))
+print("best test error:", best_error)
