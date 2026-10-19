@@ -1,5 +1,4 @@
 import random
-from collections import deque
 
 OPERATORS = ['+','-','/','*']
 MAX_DEPTH = 3
@@ -32,27 +31,23 @@ def generate_trees(num):
         trees.append(rand_tree())
     return trees
 
-def mutate(node):
+def mutate(tree):
+    idx = random.randint(1, count_nodes(tree))
     if random.randint(-1, 1) == -1:
-        node.left = rand_tree()
+        return replace_subtree(tree, idx, rand_tree())
     else:
-        node.left = rand_leaf()
-
-    if random.randint(-1, 1) == -1:
-        node.right = rand_tree()
-    else:
-        node.right = rand_leaf()
+        return replace_subtree(tree, idx, rand_leaf())
 
 # Takes in two tree root nodes to crossover and swaps a subtree of each tree at random nodes in the trees
 def crossover(tree_a, tree_b):
-    node_a, side_a = get_node(tree_a, random.randint(1, count_nodes(tree_a)))
-    node_b, side_b = get_node(tree_b, random.randint(1, count_nodes(tree_b)))
+    idx_a = random.randint(1, count_nodes(tree_a))
+    idx_b = random.randint(1, count_nodes(tree_b))
+    subtree_a = get_subtree(tree_a, idx_a)
+    subtree_b = get_subtree(tree_b, idx_b)
 
-    a = getattr(node_a, side_a)
-    b = getattr(node_b, side_b)
-
-    setattr(node_a, side_a, b)
-    setattr(node_b, side_b, a)
+    crossover_a = replace_subtree(tree_a, idx_a, subtree_b)
+    crossover_b = replace_subtree(tree_b, idx_b, subtree_a)
+    return crossover_a, crossover_b
 
 
 def count_nodes(node):
@@ -60,17 +55,28 @@ def count_nodes(node):
         return 0
     return 1 + count_nodes(node.right) + count_nodes(node.left)
 
-def get_node(root, node_num):
-    node = parent = None
-    queue = deque()
-    queue.append((root, None))
+def get_subtree(node, node_num):
+    if node_num == 1:
+        return node
 
-    for _ in range(node_num):
-        node, parent = queue.popleft()
-        if node.left is not None:
-            queue.append((node.left, node))
-        if node.right is not None:
-            queue.append((node.right, node))
-    side = 'left' if node_num % 2 == 0 else 'right'
-    return parent, side
+    left_size = count_nodes(node.left)
+    if node_num <= left_size + 1:
+        return get_subtree(node.left, node_num - 1)
+    return get_subtree(node.right, node_num - 1 - left_size)
 
+def replace_subtree(node, node_num, subtree):
+    if node_num == 1:
+        return subtree
+
+    left_size = count_nodes(node.left)
+    if node_num <= left_size + 1:
+        return Node(
+            node.data,
+            replace_subtree(node.left, node_num - 1, subtree),
+            node.right
+        )
+    return Node(
+        node.data,
+        node.left,
+        replace_subtree(node.right, node_num - 1 - left_size, subtree)
+    )
