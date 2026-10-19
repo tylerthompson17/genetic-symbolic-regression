@@ -15,7 +15,7 @@ class Node:
 def rand_leaf():
     rand = random.randint(0, 1)
     if rand == 0:
-        return Node(random.randint(-3, 3))
+        return Node(random.randint(-5, 5))
     return Node("x")
 
 def rand_tree(depth = 0):
