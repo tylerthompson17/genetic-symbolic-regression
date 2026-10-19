@@ -4,7 +4,7 @@ import numpy as np
 
 from tree import *
 
-NUM_TREES = 100 # initial number of random trees
+NUM_TREES = 500 # initial number of random trees
 NUM_GEN = 10_000 # total recurrences
 SELECTION_P = .1 # probability of individual to be reproduced
 CROSSOVER_P = .88 # probability of individual to take part of crossovers
@@ -12,7 +12,7 @@ MUTATION_P = .02 # probability of individual to be mutated
 TOURN_SIZE = 5 # tournament size
 THRESHOLD = .00001
 SIZE_PENALTY = .00001
-STAG_KILL = 50
+STAG_KILL = 200
 
 def fit(data):
     trees = generate_trees(NUM_TREES)

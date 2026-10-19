@@ -4,6 +4,8 @@ import numpy as np
 OPERATORS = ['+','-','/','*']
 VARIABLES = ["x"] # for dataset2 we need a list of x's
 REAL_CONSTANTS = False # dataset2 requires real numbers instead of integers
+UNARY_OPERATORS = ['sin', 'cos', 'exp', 'log']
+IS_UNARY = False # for dataset3 turn this on
 MAX_INITIAL_DEPTH = 3
 MAX_DEPTH = 8
 
@@ -25,6 +27,8 @@ def rand_tree(depth = 0):
     rand = random.randint(-1, 1)
     if depth >= MAX_INITIAL_DEPTH or (depth > 0 and rand >= 0):
         return rand_leaf()
+    if IS_UNARY and random.random() < 0.3: 
+        return Node(random.choice(UNARY_OPERATORS), rand_tree(depth+1))
     return Node(
         random.choice(OPERATORS),
         rand_tree(depth + 1),
@@ -138,8 +142,23 @@ def evaluate(node, val):
         right = np.where(np.abs(right) < .000000001, 1, right) # protects against division by 0 and too small denoms
         left = evaluate(node.left, val)
         return left / right
+    if node.data == 'sin':
+        return np.sin(evaluate(node.left, val))
+    if node.data == 'cos':
+        return np.cos(evaluate(node.left, val))
+    if node.data == 'exp':
+        inside = evaluate(node.left, val)
+        inside = np.minimum(inside, 50)
+        return np.exp(inside)
+    if node.data == 'log':
+        inside = evaluate(node.left, val)
+        inside = np.maximum(np.abs(inside), 0.00000001)
+        return np.log(inside)
+
 
 def to_string(node):
     if node.left is None and node.right is None:
         return str(node.data)
+    if node.right is None: 
+        return str(node.data) + "(" + to_string(node.left) + ")"
     return "(" + to_string(node.left) + str(node.data) + to_string(node.right) + ")"
