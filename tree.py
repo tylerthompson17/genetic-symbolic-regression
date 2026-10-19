@@ -2,6 +2,8 @@ import random
 import numpy as np
 
 OPERATORS = ['+','-','/','*']
+VARIABLES = ["x"] # for dataset2 we need a list of x's
+REAL_CONSTANTS = False # dataset2 requires real numbers instead of integers
 MAX_INITIAL_DEPTH = 3
 MAX_DEPTH = 8
 
@@ -14,8 +16,10 @@ class Node:
 def rand_leaf():
     rand = random.randint(0, 1)
     if rand == 0:
+        if REAL_CONSTANTS:
+            return Node(random.uniform(-5, 5))
         return Node(random.randint(-5, 5))
-    return Node("x")
+    return Node(random.choice(VARIABLES))
 
 def rand_tree(depth = 0):
     rand = random.randint(-1, 1)
@@ -34,6 +38,9 @@ def generate_trees(num):
     return trees
 
 def mutate(tree):
+    if REAL_CONSTANTS and random.random() < 0.5: # if using dataset2, half of the times nudge the values 
+        return nudge(tree)                       # instead of mutating them.
+
     idx = random.randint(1, count_nodes(tree))
     if random.randint(-1, 1) == -1:
         mutated = replace_subtree(tree, idx, rand_tree())
@@ -42,6 +49,19 @@ def mutate(tree):
     if get_depth(mutated) > MAX_DEPTH:
         return tree
     return mutated
+
+def nudge(tree):
+    constants = [i for i in range(1, count_nodes(tree) + 1)
+                 if not isinstance(get_subtree(tree, i).data, str)]
+
+    if not constants:
+        return tree
+    idx = random.choice(constants)
+    old = get_subtree(tree, idx).data
+
+    step_size = 0.1 * abs(old) + 0.01
+    new_value = old + random.gauss(0, step_size)
+    return replace_subtree(tree, idx, Node(new_value))
 
 # Takes in two tree root nodes to crossover and swaps a subtree of each tree at random nodes in the trees
 def crossover(tree_a, tree_b):
@@ -104,7 +124,9 @@ def replace_subtree(node, node_num, subtree):
 
 def evaluate(node, val):
     if node.left is None and node.right is None:
-        return val if node.data == 'x' else node.data
+        if isinstance(node.data, str):
+            return val[node.data] if isinstance(val, dict) else val
+        return node.data
     if node.data == '+':
         return evaluate(node.left, val) + evaluate(node.right, val)
     if node.data == '-':
