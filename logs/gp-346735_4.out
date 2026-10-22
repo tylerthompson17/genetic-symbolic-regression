@@ -1,5 +1,0 @@
-file run_dataset3.py, seed 4
-0 624.5532359336222 ((x*((x*((cos(x)*(x*(((x-sin(3))-sin(3))*(cos(-4)*2))))+(x*(cos(x)*5))))*((x-sin(3))+x)))+(((x-(cos(((x-cos((5*2)))-(cos((x-sin(3)))*-2)))*log(cos(x))))*(cos(((((cos(-4)*2)+x)-sin(3))*5))+(cos(((exp(((5+x)+x))+x)*(2+x)))+((3+(x-sin((5+x))))+((cos(x)*5)*(cos(x)*(x*(cos(x)*5))))))))*(-4+(((((x-(cos(x)*log(cos(x))))-(log((sin(x)/x))*(sin(sin(x))/(x-1))))-sin(sin(cos((cos(-4)*2)))))*log(((x-(cos(x)*log(cos(x))))-(cos((x-sin(3)))*log(cos(x))))))+log(sin(sin(((cos(-4)*2)+x))))))))
-best formula: ((x*((x*((cos(x)*(x*(((x-sin(3))-sin(3))*(cos(-4)*2))))+(x*(cos(x)*5))))*((x-sin(3))+x)))+(((x-(cos(((x-cos((5*2)))-(cos((x-sin(3)))*-2)))*log(cos(x))))*(cos(((((cos(-4)*2)+x)-sin(3))*5))+(cos(((exp(((5+x)+x))+x)*(2+x)))+((3+(x-sin((5+x))))+((cos(x)*5)*(cos(x)*(x*(cos(x)*5))))))))*(-4+(((((x-(cos(x)*log(cos(x))))-(log((sin(x)/x))*(sin(sin(x))/(x-1))))-sin(sin(cos((cos(-4)*2)))))*log(((x-(cos(x)*log(cos(x))))-(cos((x-sin(3)))*log(cos(x))))))+log(sin(sin(((cos(-4)*2)+x))))))))
-train error: 596.9606634162377
-test error: 624.5532359336222

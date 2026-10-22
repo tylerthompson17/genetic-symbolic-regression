@@ -1,5 +1,0 @@
-file run_dataset3.py, seed 2
-0 5175.416941186861 ((exp(log((x+x)))-(x+x))*((log(((((((x+sin(4))+cos((x*3)))+cos(((3+5)*(x+-1))))+((sin((x+x))+x)*(sin((x+x))+x)))*(((x+(-1/(x*-4)))*-1)+-5))*(((sin(sin((x+x)))+(sin((x*-1))+x))*((1/(-2/(x+-5)))+-5))*((x*-1)+-5))))*(sin((exp(log((x+x)))-((sin(-5)*x)+x)))+(sin((exp(log((x+x)))-(x+(sin(-5)*x))))+-5)))*(-2-((sin((x+x))+(sin((x+(x+((-3+-4)/(x+x)))))+x))*log((sin((x+(x+sin(exp(3)))))+(x+(-1/exp(log(x))))))))))
-best formula: ((exp(log((x+x)))-(x+x))*((log(((((((x+sin(4))+cos((x*3)))+cos(((3+5)*(x+-1))))+((sin((x+x))+x)*(sin((x+x))+x)))*(((x+(-1/(x*-4)))*-1)+-5))*(((sin(sin((x+x)))+(sin((x*-1))+x))*((1/(-2/(x+-5)))+-5))*((x*-1)+-5))))*(sin((exp(log((x+x)))-((sin(-5)*x)+x)))+(sin((exp(log((x+x)))-(x+(sin(-5)*x))))+-5)))*(-2-((sin((x+x))+(sin((x+(x+((-3+-4)/(x+x)))))+x))*log((sin((x+(x+sin(exp(3)))))+(x+(-1/exp(log(x))))))))))
-train error: 9042.448608538634
-test error: 5175.416941186861

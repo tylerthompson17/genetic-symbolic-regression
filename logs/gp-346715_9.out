@@ -1,5 +1,0 @@
-file run_dataset3.py, seed 9
-0 1874.2377039464452 ((((((x+cos((x*-4)))+cos(exp((cos(((2+x)+-5))*(-4+-5)))))+5)+((x+cos((cos((cos(x)+(exp(-4)-5)))*(cos(x)+-5))))+cos((sin(cos(((0+x)*cos(3))))+cos((cos((cos(x)+-5))*((2/x)+(cos(2)+-5))))))))/exp(((x+cos((4*cos(sin(sin(cos(x)))))))+cos((-4*cos((sin(sin(cos(x)))+-5)))))))+(cos(x)/exp(((x+x)+cos(-5)))))
-best formula: ((((((x+cos((x*-4)))+cos(exp((cos(((2+x)+-5))*(-4+-5)))))+5)+((x+cos((cos((cos(x)+(exp(-4)-5)))*(cos(x)+-5))))+cos((sin(cos(((0+x)*cos(3))))+cos((cos((cos(x)+-5))*((2/x)+(cos(2)+-5))))))))/exp(((x+cos((4*cos(sin(sin(cos(x)))))))+cos((-4*cos((sin(sin(cos(x)))+-5)))))))+(cos(x)/exp(((x+x)+cos(-5)))))
-train error: 1996.4176429518693
-test error: 1874.2377039464452

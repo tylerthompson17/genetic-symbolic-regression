@@ -1,5 +1,0 @@
-file run_dataset3.py, seed 12
-0 1105.2284941545372 (-4*((x*(x*(-5*(log(((((x+-3)+(x*x))*(x+(4/x)))*sin(x)))-x))))*cos(((x-sin(cos(exp(log(x)))))-sin(sin(cos(x)))))))
-best formula: (-4*((x*(x*(-5*(log(((((x+-3)+(x*x))*(x+(4/x)))*sin(x)))-x))))*cos(((x-sin(cos(exp(log(x)))))-sin(sin(cos(x)))))))
-train error: 1102.3067051096982
-test error: 1105.2284941545372
