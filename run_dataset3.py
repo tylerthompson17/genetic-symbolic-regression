@@ -5,7 +5,7 @@ import tree
 df = pd.read_csv("dataset3.csv")
 
 test_df = df.sample(n=20000, random_state=42)
-train_df = df.drop(test_df.index)
+train_df = df.drop(test_df.index).sample(n=2000, random_state=42) # fewer training points: about 2.5x faster runs
 
 tree.IS_UNARY = True
 tree.REAL_CONSTANTS = False
