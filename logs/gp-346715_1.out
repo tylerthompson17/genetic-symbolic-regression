@@ -1,0 +1,5 @@
+file run_dataset3.py, seed 1
+0 440.6914142589623 ((4-exp((cos((4-exp((cos(x)+exp(exp(-4))))))+(cos(x)+exp(exp(-4))))))*((cos((4-(sin((x+(cos(5)+(cos(4)+x))))+(cos(exp(cos(x)))+(cos(((x+-1)+log(x)))+log(sin(exp(x))))))))+(exp(cos((4-(cos((x+x))+x))))+(sin((x+x))+(cos((4-x))+(exp(cos(x))+(cos(4)+x))))))/exp((exp((cos(((log(cos(x))+(x+-2))*cos((4-x))))+(cos(sin(sin((x+x))))+(cos((x+x))+x))))+(cos(x)+(cos((4-x))+(exp(cos(x))+(cos(4)+x))))))))
+best formula: ((4-exp((cos((4-exp((cos(x)+exp(exp(-4))))))+(cos(x)+exp(exp(-4))))))*((cos((4-(sin((x+(cos(5)+(cos(4)+x))))+(cos(exp(cos(x)))+(cos(((x+-1)+log(x)))+log(sin(exp(x))))))))+(exp(cos((4-(cos((x+x))+x))))+(sin((x+x))+(cos((4-x))+(exp(cos(x))+(cos(4)+x))))))/exp((exp((cos(((log(cos(x))+(x+-2))*cos((4-x))))+(cos(sin(sin((x+x))))+(cos((x+x))+x))))+(cos(x)+(cos((4-x))+(exp(cos(x))+(cos(4)+x))))))))
+train error: 444.3334525970256
+test error: 440.6914142589623
