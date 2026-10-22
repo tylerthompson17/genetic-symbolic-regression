@@ -58,11 +58,16 @@ def fit(data):
 def get_fitness(tree, data):
     x_points, y_points = data
     y_hat = evaluate(tree, x_points)
-    return np.mean((y_points - y_hat) ** 2)
+    error = np.mean((y_points - y_hat) ** 2)
+    if np.isnan(error):
+        return float("inf")
+    return error
 
 def get_individual(trees, fitn):
     selected = random.sample(range(len(trees)), TOURN_SIZE)
-    best = min(selected, key=lambda i: fitn[i] + SIZE_PENALTY * count_nodes(trees[i]))
+    # best = min(selected, key=lambda i: fitn[i] + SIZE_PENALTY * count_nodes(trees[i]))
+    # make the penalty a percentage instead of a constant
+    best = min(selected, key=lambda i: fitn[i] * (1 + SIZE_PENALTY * count_nodes(trees[i])))
     return trees[best]
 
 

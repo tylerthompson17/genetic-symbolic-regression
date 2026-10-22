@@ -27,7 +27,7 @@ def rand_tree(depth = 0):
     rand = random.randint(-1, 1)
     if depth >= MAX_INITIAL_DEPTH or (depth > 0 and rand >= 0):
         return rand_leaf()
-    if IS_UNARY and random.random() < 0.3: 
+    if IS_UNARY and random.random() < 0.5: 
         return Node(random.choice(UNARY_OPERATORS), rand_tree(depth+1))
     return Node(
         random.choice(OPERATORS),
@@ -77,16 +77,13 @@ def crossover(tree_a, tree_b):
     crossover_a = replace_subtree(tree_a, idx_a, subtree_b)
     crossover_b = replace_subtree(tree_b, idx_b, subtree_a)
 
-    a_depth = get_depth(crossover_a)
-    b_depth = get_depth(crossover_b)
 
-    if a_depth > MAX_DEPTH > b_depth:
-        return tree_a, crossover_b
-    elif b_depth > MAX_DEPTH > a_depth:
-        return crossover_a, tree_b
-    elif b_depth > MAX_DEPTH and a_depth > MAX_DEPTH:
-        return tree_a, tree_b
-
+    # if a child is too deep give back its parent instead.
+    if get_depth(crossover_a) > MAX_DEPTH:
+        crossover_a = tree_a
+    if get_depth(crossover_b) > MAX_DEPTH:
+        crossover_b = tree_b
+        
     return crossover_a, crossover_b
 
 
