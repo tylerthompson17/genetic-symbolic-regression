@@ -1,0 +1,5 @@
+file run_dataset3.py, seed 6
+0 5104.7674602617 ((((((exp(sin(log(sin(exp(x)))))*(cos(((x+2)*x))+(cos(((x+-4)*(5*-3)))+x)))+(((log(sin((x+3)))+x)*sin((cos((4*x))+x)))+((cos(((x+-1)*(-4+x)))+(cos((-4*x))+x))+(log(sin(exp(x)))+(-4-log(sin(x)))))))*(cos((log(sin(exp(x)))+(exp(cos((3*x)))+2)))*x))*log(sin(exp(x))))*exp(cos(cos((x+(x-exp(((5+x)+x))))))))*exp(cos((x+(-4+-4)))))
+best formula: ((((((exp(sin(log(sin(exp(x)))))*(cos(((x+2)*x))+(cos(((x+-4)*(5*-3)))+x)))+(((log(sin((x+3)))+x)*sin((cos((4*x))+x)))+((cos(((x+-1)*(-4+x)))+(cos((-4*x))+x))+(log(sin(exp(x)))+(-4-log(sin(x)))))))*(cos((log(sin(exp(x)))+(exp(cos((3*x)))+2)))*x))*log(sin(exp(x))))*exp(cos(cos((x+(x-exp(((5+x)+x))))))))*exp(cos((x+(-4+-4)))))
+train error: 5229.160121576402
+test error: 5104.7674602617

@@ -33,6 +33,8 @@ Given a dataset of independent and dependent variables, can we use symbolic regr
 - `gp.py`: the evolution loop (`fit`), the fitness (`get_fitness`), and tournament selection (`get_individual`).
 - `run_dataset1.py`, `run_dataset2.py`, `run_dataset3.py`: load a dataset, set its options, and run GP.
 - `plot.py`: plots dataset3 with the best formula on top.
+- `gp_array.sh`: a Slurm job array for the Davidson cluster. Each task does one run of a `run_datasetN.py` with its task number as the seed: `sbatch gp_array.sh run_dataset3.py`.
+- `results/dataset3/`: the cluster runs for dataset3. `SUMMARY.txt` lists every seed's errors and the best formula; `logs/` has each run's output.
 
 ## How to run
 

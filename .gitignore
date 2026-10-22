@@ -3,3 +3,7 @@ __pycache__/
 .idea/
 .vscode/
 .DS_Store
+
+# cluster run output (keep results in results/ instead)
+/logs/
+.ipynb_checkpoints/
